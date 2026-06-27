@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de Colonias 2026 — Chihuahua</title>
+<style>
+  :root {
+    --azul-inst: #0d2b52;
+    --azul-medio: #1a4a8a;
+    --azul-claro: #2e6dc4;
+    --acento: #c8a84b;
+    --fondo: #f5f6f8;
+    --blanco: #ffffff;
+    --gris-borde: #d0d5de;
+    --gris-texto: #4a5568;
+    --verde: #1a7a4a;
+    --rojo: #c0392b;
+    --sombra: 0 2px 8px rgba(13,43,82,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--fondo);
+    color: #1a202c;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--azul-inst);
+    color: var(--blanco);
+    padding: 0;
+    border-bottom: 4px solid var(--acento);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 32px;
+    flex-wrap: wrap; /* Mejora en móvil */
+  }
+  .header-escudo {
+    width: 52px;
+    height: 52px;
+    background: var(--acento);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .header-texto h1 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .header-texto p {
+    font-size: 0.78rem;
+    color: #a8bcd8;
+    margin-top: 2px;
+  }
+  .header-badge {
+    margin-left: auto;
+    background: var(--acento);
+    color: var(--azul-inst);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  /* CONTENEDOR PRINCIPAL */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 20px 48px;
+  }
+
+  /* PANEL DE BÚSQUEDA */
+  .busqueda-panel {
+    background: var(--blanco);
+    border-radius: 10px;
+    box-shadow: var(--sombra);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    border-top: 4px solid var(--azul-claro);
+  }
+  .busqueda-panel h2 {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--azul-medio);
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .controles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 14px;
+    align-items: end;
+  }
+  
+  /* RESPONSIVE MÓVIL */
+  @media (max-width: 700px) {
+    .controles-grid { grid-template-columns: 1fr 1fr; }
+    .controles-grid .btn-limpiar { grid-column: span 2; }
+    .header-badge { margin-left: 0; margin-top: 10px; }
+  }
+  
+  @media (max-width: 480px) {
+    .controles-grid { grid-template-columns: 1fr; }
+    .controles-grid .btn-limpiar { grid-column: span 1; }
+    .stats-bar { flex-direction: column; }
+    .stat-chip { width: 100%; justify-content: space-between; }
+    .header-inner { padding: 18px 20px; }
+  }
+
+  .campo label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gris-texto);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .campo input, .campo select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1.5px solid var(--gris-borde);
+    border-radius: 6px;
+    font-size: 0.88rem;
+    color: #1a202c;
+    background: var(--blanco);
+    transition: border-color 0.18s;
+    appearance: none;
+  }
+  .campo input:focus, .campo select:focus {
+    outline: none;
+    border-color: var(--azul-claro);
+    box-shadow: 0 0 0 3px rgba(46,109,196,0.12);
+  }
+  .campo input::placeholder { color: #a0aec0; }
+
+  .btn-limpiar {
+    padding: 9px 18px;
+    background: var(--fondo);
+    border: 1.5px solid var(--gris-borde);
+    border-radius: 6px;
+    font-size: 0.83rem;
+    color: var(--gris-texto);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .btn-limpiar:hover {
+    background: #e2e6ef;
+    border-color: #a0aec0;
+  }
+
+  /* RESUMEN STATS */
+  .stats-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .stat-chip {
+    background: var(--blanco);
+    border: 1.5px solid var(--gris-borde);
+    border-radius: 8px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    box-shadow: var(--sombra);
+  }
+  .stat-chip .num {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--azul-medio);
+    line-height: 1;
+  }
+  .stat-chip .label {
+    color: var(--gris-texto);
+    font-weight: 500;
+  }
+  .stat-chip.highlight { border-color: var(--acento); }
+  .stat-chip.highlight .num { color: var(--acento); }
+
+  /* TABLA */
+  .tabla-wrap {
+    background: var(--blanco);
+    border-radius: 10px;
+    box-shadow: var(--sombra);
+    overflow: hidden;
+  }
+  .tabla-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--gris-borde);
+    background: var(--fondo);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .tabla-header span {
+    font-size: 0.78rem;
+    color: var(--gris-texto);
+    font-weight: 600;
+  }
+  #resultados-count {
+    font-size: 0.83rem;
+    color: var(--azul-medio);
+    font-weight: 700;
+  }
+
+  /* SOLUCIÓN AL PROBLEMA DE SCROLL MÓVIL */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    min-width: 600px; /* Asegura que la tabla no se aplaste */
+  }
+  thead th {
+    background: var(--azul-inst);
+    color: var(--blanco);
+    padding: 11px 16px;
+    text-align: left;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-weight: 700;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 10; /* CRÍTICO: Soluciona la desaparición en móviles */
+  }
+  thead th:first-child { border-radius: 0; }
+
+  tbody tr {
+    border-bottom: 1px solid #edf0f5;
+    transition: background 0.12s;
+  }
+  tbody tr:hover { background: #f0f4fb; }
+  tbody tr:last-child { border-bottom: none; }
+
+  td {
+    padding: 10px 16px;
+    vertical-align: middle;
+  }
+  td:first-child { font-weight: 600; }
+
+  .badge-distrito {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .d-angel  { background: #e8f4fd; color: #1565c0; }
+  .d-colon  { background: #f3e8fd; color: #6a1b9a; }
+  .d-diana  { background: #e8fdf4; color: #1a7a4a; }
+  .d-leon   { background: #fdf3e8; color: #a04000; }
+  .d-morelos{ background: #fde8e8; color: #c0392b; }
+  .d-villa  { background: #fdf8e8; color: #7d6608; }
+  .d-zapata { background: #e8f8fd; color: #00697a; }
+
+  .cuadrante-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 24px;
+    background: var(--azul-inst);
+    color: var(--blanco);
+    border-radius: 5px;
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  mark {
+    background: #fff59d;
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+
+  /* VACÍO */
+  .sin-resultados {
+    text-align: center;
+    padding: 52px 20px;
+    color: var(--gris-texto);
+  }
+  .sin-resultados .icono { font-size: 2.8rem; margin-bottom: 12px; }
+  .sin-resultados p { font-size: 0.95rem; }
+  .sin-resultados small { font-size: 0.8rem; color: #a0aec0; display: block; margin-top: 4px; }
+
+  /* PAGINACIÓN */
+  .paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    border-top: 1px solid var(--gris-borde);
+    flex-wrap: wrap; /* Permite que los botones bajen si no caben en móvil */
+  }
+  .paginacion button {
+    padding: 6px 13px;
+    border: 1.5px solid var(--gris-borde);
+    background: var(--blanco);
+    border-radius: 5px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    color: var(--azul-medio);
+    font-weight: 600;
+    transition: all 0.14s;
+  }
+  .paginacion button:hover:not(:disabled) { background: var(--azul-inst); color: white; border-color: var(--azul-inst); }
+  .paginacion button.activa { background: var(--azul-inst); color: white; border-color: var(--azul-inst); }
+  .paginacion button:disabled { opacity: 0.35; cursor: default; }
+  .paginacion .info-pag { font-size: 0.8rem; color: var(--gris-texto); padding: 0 8px; }
+
+  footer {
+    text-align: center;
+    padding: 18px;
+    font-size: 0.72rem;
+    color: #a0aec0;
+    border-top: 1px solid var(--gris-borde);
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-escudo">🛡️</div>
+    <div class="header-texto">
+      <h1>Catálogo de Colonias — Chihuahua 2026</h1>
+      <p>Dirección de Seguridad Pública Municipal · Sistema de Consulta Territorial</p>
+    </div>
+    <div class="header-badge">DSPM · 2026</div>
+  </div>
+</header>
+
+<div class="main">
+
+  <div class="busqueda-panel">
+    <h2>🔍 Consulta por Colonia · Distrito · Cuadrante</h2>
+    <div class="controles-grid">
+      <div class="campo">
+        <label>Colonia</label>
+        <input type="text" id="busq-colonia" placeholder="Ej: Zapata, Lomas..." autocomplete="off">
+      </div>
+      <div class="campo">
+        <label>Distrito</label>
+        <select id="busq-distrito">
+          <option value="">— Todos los distritos —</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Cuadrante</label>
+        <select id="busq-cuadrante">
+          <option value="">— Todos los cuadrantes —</option>
+        </select>
+      </div>
+      <button class="btn-limpiar" onclick="limpiarFiltros()">✕ Limpiar</button>
+    </div>
+  </div>
+
+  <div class="stats-bar" id="stats-bar">
+    <div class="stat-chip highlight">
+      <div class="num" id="stat-mostrando">—</div>
+      <div class="label">Colonias<br>mostradas</div>
+    </div>
+    <div class="stat-chip">
+      <div class="num" id="stat-total">756</div>
+      <div class="label">Total en<br>catálogo</div>
+    </div>
+    <div class="stat-chip">
+      <div class="num" id="stat-distritos">—</div>
+      <div class="label">Distritos<br>en filtro</div>
+    </div>
+    <div class="stat-chip">
+      <div class="num" id="stat-cuadrantes">—</div>
+      <div class="label">Cuadrantes<br>en filtro</div>
+    </div>
+  </div>
+
+  <div class="tabla-wrap">
+    <div class="tabla-header">
+      <span id="resultados-count">Cargando...</span>
+      <span id="orden-info" style="font-size:0.75rem;color:#a0aec0;">Orden: Distrito → Cuadrante → Colonia</span>
+    </div>
+    <div class="table-responsive">
+      <table id="tabla-colonias">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Distrito</th>
+            <th>Cuadrante</th>
+            <th>Colonia</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-body"></tbody>
+      </table>
+    </div>
+    <div id="sin-resultados" class="sin-resultados" style="display:none;">
+      <div class="icono">🔍</div>
+      <p>No se encontraron colonias con los filtros aplicados.</p>
+      <small>Intente con otros términos de búsqueda.</small>
+    </div>
+    <div class="paginacion" id="paginacion"></div>
+  </div>
+
+</div>
+
+<footer>
+  Catálogo de Colonias 2026 v2 · Dirección de Seguridad Pública Municipal · Chihuahua, Chih.
+</footer>
+
+<script>
+const DATOS = [{"Distrito":"Ángel","Cuadrante":35,"Colonia":"ARQUITECTOS"},{"Distrito":"Ángel","Cuadrante":35,"Colonia":"BARRIO EL BAJO"},{"Distrito":"Ángel","Cuadrante":35,"Colonia":"BENITO JUAREZ"},{"Distrito":"Ángel","Cuadrante":35,"Colonia":"CAZADORES"},{"Distrito":"Ángel","Cuadrante":35,"Colonia":"CHIHUAHUENSE"},{"Distrito":"Ángel","Cuadrante":35,"Colonia":"CONDOMINIO SAN JOSE"},{"Distrito":"Ángel","Cuadrante":35,"Colonia":"MONTECARLO"},{"Distrito":"Ángel","Cuadrante":35,"Colonia":"POPULAR"},{"Distrito":"Ángel","Cuadrante":35,"Colonia":"ROMA SUR"},{"Distrito":"Ángel","Cuadrante":35,"Colonia":"TIRADORES"},{"Distrito":"Ángel","Cuadrante":36,"Colonia":"CHE GUEVARA"},{"Distrito":"Ángel","Cuadrante":36,"Colonia":"EL BAJO"},{"Distrito":"Ángel","Cuadrante":37,"Colonia":"BARRIO SAN PEDRO"},{"Distrito":"Ángel","Cuadrante":37,"Colonia":"PARQUE ROTARIO"},{"Distrito":"Ángel","Cuadrante":37,"Colonia":"ZONA CENTRO"},{"Distrito":"Ángel","Cuadrante":40,"Colonia":"OBRERA"},{"Distrito":"Ángel","Cuadrante":41,"Colonia":"SECTOR BOLIVAR"},{"Distrito":"Colón","Cuadrante":3,"Colonia":"INTERMEX NORTE"},{"Distrito":"Colón","Cuadrante":3,"Colonia":"RIBERAS DE SACRAMENTO"},{"Distrito":"Colón","Cuadrante":3,"Colonia":"VISTAS DEL PRADO"},{"Distrito":"Colón","Cuadrante":4,"Colonia":"AGRICOLA FRANCISCO VILLA"},{"Distrito":"Colón","Cuadrante":4,"Colonia":"GRANJAS DEL VALLE"},{"Distrito":"Colón","Cuadrante":4,"Colonia":"NUEVO MILENIO"},{"Distrito":"Colón","Cuadrante":4,"Colonia":"VALLE DEL SAUCO"},{"Distrito":"Colón","Cuadrante":4,"Colonia":"VISTAS DEL NORTE"},{"Distrito":"Colón","Cuadrante":5,"Colonia":"LADRILLEROS NORTE"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"CAMPESTRE LAS CAROLINAS"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"CONSTITUYENTES"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"JOSE MENECES"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"JOSE VASCONCELOS"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"JUAN GÜERECA"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"LAS ALDABAS"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"LAS LUNAS"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"LUIS FUENTES MARES"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"MAGISTERIAL SOLIDARIDAD (NORTE)"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"MOLINO DE AGUA"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"NIÑOS HEROES"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"PALMA REAL"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"PARQUE INDUSTRIAL IMPULSO"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"PARQUE INDUSTRIAL SUPRA"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"QUINTAS SAN CARLO"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"RESERVA PAVILSA"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"SOLIDARIDAD POPULAR"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"UNIDAD DEPORTIVA JOSE PISTOLAS MENECES"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"VALLE DE SAN PEDRO"},{"Distrito":"Colón","Cuadrante":6,"Colonia":"VICENTE GUERECA"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"20 ANIVERSARIO"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"LADERAS"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"LOS ARCOS"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"LOS OLIVOS"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"LOS PORTALES"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"MARIA ELENA HERNANDEZ"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"MIGUEL SIGALA"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"PARQUE INDUSTRIAL IMPULSO VII"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"PARQUE INDUSTRIAL IMPULSO VIII"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"QUINTAS MONTECARLO"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"REAL DE CAROLINAS"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"RINCON DE LOS OLIVOS"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"SUBESTACION CFE"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"VIDA DIGNA"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"VILLA DEL NORTE"},{"Distrito":"Colón","Cuadrante":7,"Colonia":"VILLA DEL REY V"},{"Distrito":"Colón","Cuadrante":8,"Colonia":"ATANACIO ORTEGA"},{"Distrito":"Colón","Cuadrante":8,"Colonia":"COLONIAL DE MINAS"},{"Distrito":"Colón","Cuadrante":8,"Colonia":"DUMAS"},{"Distrito":"Colón","Cuadrante":8,"Colonia":"JARDINES DEL SOL"},{"Distrito":"Colón","Cuadrante":8,"Colonia":"POZOS DEL VALLE"},{"Distrito":"Colón","Cuadrante":8,"Colonia":"REAL DE SANTA EULALIA"},{"Distrito":"Colón","Cuadrante":8,"Colonia":"RODOLFO FIERRO"},{"Distrito":"Colón","Cuadrante":8,"Colonia":"SAHUAROS"},{"Distrito":"Colón","Cuadrante":8,"Colonia":"SAN GABRIEL"},{"Distrito":"Colón","Cuadrante":8,"Colonia":"VILLAS DEL REAL"},{"Distrito":"Colón","Cuadrante":8,"Colonia":"VILLAS DEL REY"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"ANTORCHA POPULAR"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"DEL OLMO"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"EL MINERAL"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"INTI PEREDO"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"JOSE FRANCISCO RUIZ MASSIEU"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"LUIS DONALDO COLOSIO MURRIETA (NORTE)"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"MEXICO"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"NUEVO TRIUNFO"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"PEDRO DOMINGUEZ"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"PORVENIR"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"PROGRESO NACIONAL"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"RAYMUNDO LOPEZ"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"REAL DE MINAS"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"SANTA CECILIA"},{"Distrito":"Colón","Cuadrante":9,"Colonia":"TARAHUMARA"},{"Distrito":"Colón","Cuadrante":10,"Colonia":"ROBERTO OROZCO"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"CAMPO BELLO"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"CORDILLERAS"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"HACIENDA DE SANTA CLARA I"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"LOS CLAUSTROS UNIVERSIDAD"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"MISION UNIVERSIDAD"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"MISION UNIVERSIDAD I"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"MISION UNIVERSIDAD III"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"PASEO DE LAS MISIONES"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"PROVINCIA DE SANTA CLARA"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"PUERTA DEL VALLE"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"PUERTA RIBERA REAL"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"RINCON DE LA SIERRA"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"RINCONADA UNIVERSIDAD"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"RINCONES DEL PICACHO"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"RISCOS DEL ANGEL"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"RISCOS DEL SOL   I"},{"Distrito":"Colón","Cuadrante":11,"Colonia":"VILLAS DEL SOL"},{"Distrito":"Colón","Cuadrante":12,"Colonia":"BOSQUES DE SAN PEDRO (ANTES LOS ARROYOS IV)"},{"Distrito":"Colón","Cuadrante":12,"Colonia":"LOS ARROYOS"},{"Distrito":"Colón","Cuadrante":12,"Colonia":"LOS CAFETALES"},{"Distrito":"Colón","Cuadrante":12,"Colonia":"LOS HUERTOS"},{"Distrito":"Colón","Cuadrante":12,"Colonia":"PASEOS DE CHIHUAHUA"},{"Distrito":"Colón","Cuadrante":12,"Colonia":"PRIVADA LOS HUERTOS"},{"Distrito":"Colón","Cuadrante":12,"Colonia":"PUERTA DEL NORTE"},{"Distrito":"Colón","Cuadrante":12,"Colonia":"QUINTA SEBASTIAN"},{"Distrito":"Colón","Cuadrante":12,"Colonia":"RINCON DE LOS HUERTOS"},{"Distrito":"Colón","Cuadrante":13,"Colonia":"ALAMEDAS"},{"Distrito":"Colón","Cuadrante":13,"Colonia":"CHIHUAHUA 2000"},{"Distrito":"Colón","Cuadrante":13,"Colonia":"COMPLEJO INDUSTRIAL CHIHUAHUA"},{"Distrito":"Colón","Cuadrante":13,"Colonia":"CONDOMINIO INDUSTRIAL ACROS"},{"Distrito":"Colón","Cuadrante":13,"Colonia":"ROMA QUINTAS QUIJOTE"},{"Distrito":"Colón","Cuadrante":13,"Colonia":"SIGLO XXI"},{"Distrito":"Colón","Cuadrante":14,"Colonia":"ATENAS"},{"Distrito":"Colón","Cuadrante":14,"Colonia":"INTEGRACION"},{"Distrito":"Colón","Cuadrante":14,"Colonia":"JOSE MARIA PONCE DE LEON"},{"Distrito":"Colón","Cuadrante":14,"Colonia":"SERGIO DE LA TORRE HERNANDEZ"},{"Distrito":"Colón","Cuadrante":15,"Colonia":"LAS QUINTAS"},{"Distrito":"Colón","Cuadrante":15,"Colonia":"NUEVO HORIZONTE"},{"Distrito":"Colón","Cuadrante":15,"Colonia":"OLIMPO"},{"Distrito":"Colón","Cuadrante":15,"Colonia":"QUINTAS CAROLINAS"},{"Distrito":"Colón","Cuadrante":15,"Colonia":"REAL DE POTREROS"},{"Distrito":"Colón","Cuadrante":15,"Colonia":"SAN ANTONIO"},{"Distrito":"Colón","Cuadrante":15,"Colonia":"SANTO TOMAS"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"BAHIAS"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"CONSTITUYENTES FRACC."},{"Distrito":"Diana","Cuadrante":28,"Colonia":"CUMBRES UNIVERSIDAD"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"IGNACIO ALLENDE"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"JARDINES DEL SAUCITO"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"JARDINES UNIVERSIDAD"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"LAS LOMAS"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"LOMA DORADA"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"LOMAS UNIVERSIDAD"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"NUEVO CHIHUAHUA"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"NUEVO CHIHUAHUA ETAPA VI"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"OSCAR FLORES SANCHEZ"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"RESIDENCIAL BARRANCAS"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"RINCON DE LA MORA"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"RINCON SOBERANO"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"RINCONADA DE LA SIERRA"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"RINCONES DEL PEDREGAL ETAPA II"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"UNIDAD"},{"Distrito":"Diana","Cuadrante":28,"Colonia":"VILLA DORADA"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"ARBOLEDAS III ETAPA"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"BOSQUE DEL VALLE"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"BOSQUES DE SAN FRANCISCO"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"BOSQUES DEL VALLE II"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"BOSQUES DEL VALLE III"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"BOSQUES DEL VALLE IV"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"CENIT TORRE RESIDENCIAL"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"CERRADA DEL PARQUE"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"CHARROS"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"COLINAS DEL SOL II"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"CONDOMINIO CORPORATIVO DISTRITO 1"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"CONDOMINIO RESIDENCIAL SAN FRANCISCO"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"CUMBRES DE SAN FCO. I"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"JARDINES DE SAN FRANCISCO"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"LA CANTERA CERRADA"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"LAS MISIONES"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"LOMAS DEL SOL"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"PARQUE INDUSTRIAL LAS AMERICAS"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"PREDIO LA CANTERA"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"PUNTO ALTO 1"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"PUNTO ALTO 2"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"PUNTO ALTO E4"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"RESIDENCIAL ALBATERRA"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"RESIDENCIAL ALBATERRA II"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"RESIDENCIAL ALBATERRA III"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"RINCONES DE SAN FRANCISCO"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"SINDICATO BANRURAL"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"TORRE LUMINA"},{"Distrito":"Diana","Cuadrante":29,"Colonia":"VALLE DEL ANGEL"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"CAMINOS DEL VALLE"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"CANTERA  DEL PEDREGAL"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"CERRADA DE CUMBRES"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"CUMBRES DEL PEDREGAL"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"ENCORDADA DEL VALLE"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"FRACCIONAMIENTO MONTICELLO"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"LOCALIDAD LA CANTERA (LA HACIENDITA)"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"MISION DEL BOSQUE"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"MISION DEL VALLE"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"PEDREGAL DEL ALBA"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"PEDREGAL DEL VALLE"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"PEDREGAL SAN ANGEL"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"PUENTE DE CANTERA"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"PUENTE DE PIEDRA"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"RESIDENCIAL CUMBRES III"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"RESIDENCIAL CUMBRES V"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"RESIDENCIAL CUMBRES VI"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"RESIDENCIAL LA CANTERA I Y II"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"RESIDENCIAL LA CANTERA III Y IV"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"RESIDENCIAL LA CANTERA V"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"RINCONADAS DEL VALLE"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"RINCONADAS DEL VALLE V"},{"Distrito":"Diana","Cuadrante":30,"Colonia":"VILLA TOSCANA"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"AMERICAS"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"BUROCRATA ESTATAL"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"CAMPANARIO"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"COLINAS DEL VALLE"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"CONDOMINIO COMERCIAL TRES VIAS"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"CUMBRES II"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"EMILIANO ZAPATA"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"FIDEL VELAZQUEZ"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"HACIENDAS DEL VALLE I"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"HACIENDAS DEL VALLE II"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"MONTE VESUBIO"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"PANAMERICANA"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"PROGRESO"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"RAMON MENA"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"RECURSOS HIDRAULICOS"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"RESIDENCIAL CAMPESTRE I"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"RESIDENCIAL CAMPESTRE III"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"RESIDENCIAL CAMPESTRE WASHINGTON"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"RESIDENCIAL CUMBRES I"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"RESIDENCIAL CUMBRES IV"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"RESIDENCIAL URUGUAY"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"UNIDAD PRESIDENTES"},{"Distrito":"Diana","Cuadrante":31,"Colonia":"VISTAS CAMPESTRE"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"ABRAHAM GONZALEZ"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"AVICOLA"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"BOSQUES DEL REJON"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"CERRADA VISTA REAL"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"COLEGIO BILINGUE MADISON Y SPABI"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"COMERCIAL COLEGIO"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"COMERCIAL COLEGIO III"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"CONDOMINIOS FOVISSSTE"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"FRACCIONAMIENTO LOMAS DE SAN CHARBEL"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"FRACCIONAMIENTO RESIDENCIAL NATURA"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"FRACCIONAMIENTO VISTAS DEL VALLE"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"FUENTES DEL SOL"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"FUENTES DEL VALLE"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"HACIENDAS DEL REJON I"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"HACIENDAS DEL REJON II"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"HACIENDAS DEL VALLE IIII"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"HERRADURA LA SALLE"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"HOSPITAL CIMA"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"LA CAÑADA"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"LAS FUENTES"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"LOMAS ALTAS"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"LOMAS DEL PEDREGAL"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"LOMAS DEL REJON"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"LOMAS DEL VALLE"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"LOMAS LA SALLE I, II"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"PABLO GOMEZ"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"PUERTA DE HIERRO"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"RINCON DE LAS LOMAS"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"VISTAS DEL PEDREGAL"},{"Distrito":"Diana","Cuadrante":32,"Colonia":"VISTAS DEL SOL"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"ARCADAS"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"ARGEO"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"CLUB CAMPESTRE"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"HACIENDAS"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"HACIENDAS IV"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"HACIENDAS SANTA FE"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"HERRADURA"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"LA ESCONDIDA"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"LAS AGUILAS"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"LOS CEDROS"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"MONTANA"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"PARQUE DE LOS NEGOCIOS"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"QUINTAS DEL SOL"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"RESIDENCIAL CAMPESTRE II"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"RESIDENCIAL CAMPESTRE IV"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"SPHERA SKY RESIDENCES"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"VERMONT"},{"Distrito":"Diana","Cuadrante":33,"Colonia":"VIRREYES"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"ANDALUCIA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"BALEARES"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"CERRADA DE BAENA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"CERRADA DE CASTILLA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"CERRADA DE RIOJA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"CERRADA NAVARRA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"DIAMANTE RELIZ"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"ESCUELA LIBRE DE PSICOLOGIA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"FRACC.  RESERVA DEL PARQUE"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"FRACC. HACIENDA LORETO"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"FRACC. HACIENDA VICTORIA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"FRACCIONAMIENTO ALMERIA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"HACIENDA CAMILA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"HACIENDA CARLOTA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"HACIENDA ISABELLA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"HACIENDA SOFIA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"LOMAS DE JUAN PABLO"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"MONDELLO RESIDENCIAL"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"MONTE VERDE I ETAPA I"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"MONTE VERDE I ETAPA II"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"MONTE VERDE I ETAPA III"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"MONTE VERDE I ETAPA IV"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"MONTE VERDE I ETAPA V"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"MONTE VERDE I ETAPA VI"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"MONTERDE II ETAPA 1"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"MONTERDE II ETAPA II"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"MONTERDE II ETAPA III"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"PARQUE RELIZ"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"RESIDENCIAL VERANDAH"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"RINCON DE LAS FLORES"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"SERATTA 36"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"VILLA SANTA LUCIA"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"VISTAS DEL RELIZ II"},{"Distrito":"Diana","Cuadrante":34,"Colonia":"VISTAS EL RELIZ"},{"Distrito":"León","Cuadrante":42,"Colonia":"GRANJAS FAMILIARES VALLE DE CHIHUAHUA"},{"Distrito":"León","Cuadrante":43,"Colonia":"LINDA VISTA"},{"Distrito":"León","Cuadrante":44,"Colonia":"AEROPUERTO"},{"Distrito":"León","Cuadrante":44,"Colonia":"FLORIDA"},{"Distrito":"León","Cuadrante":44,"Colonia":"LA PISTA"},{"Distrito":"León","Cuadrante":44,"Colonia":"RANCHO GUADALUPE"},{"Distrito":"León","Cuadrante":44,"Colonia":"RIBERAS DEL VALLE"},{"Distrito":"León","Cuadrante":45,"Colonia":"BRISAS DEL LEON I"},{"Distrito":"León","Cuadrante":45,"Colonia":"COLINAS DE LEON"},{"Distrito":"León","Cuadrante":45,"Colonia":"ENCORDADA DE LEON"},{"Distrito":"León","Cuadrante":45,"Colonia":"FRACC.ROMANCE"},{"Distrito":"León","Cuadrante":45,"Colonia":"PASEO DE LOS LEONES"},{"Distrito":"León","Cuadrante":45,"Colonia":"PLOMEROS"},{"Distrito":"León","Cuadrante":45,"Colonia":"PRADERAS DEL LEON"},{"Distrito":"León","Cuadrante":45,"Colonia":"RESIDENCIAL EL LEON"},{"Distrito":"León","Cuadrante":45,"Colonia":"ROBINSON SECTOR 2"},{"Distrito":"León","Cuadrante":45,"Colonia":"ROMANZZA"},{"Distrito":"León","Cuadrante":46,"Colonia":"ACEQUIAS DE TABALAOPA"},{"Distrito":"León","Cuadrante":46,"Colonia":"CALIFORNIA"},{"Distrito":"León","Cuadrante":46,"Colonia":"CALIFORNIA II"},{"Distrito":"León","Cuadrante":46,"Colonia":"LA GALERA"},{"Distrito":"León","Cuadrante":46,"Colonia":"LOS GIRASOLES"},{"Distrito":"León","Cuadrante":46,"Colonia":"LOS NARANJOS"},{"Distrito":"León","Cuadrante":46,"Colonia":"PLANTA DE TRATAMIENTO DE AGUA SUR"},{"Distrito":"León","Cuadrante":46,"Colonia":"QUINTAS JUAN PABLO"},{"Distrito":"León","Cuadrante":46,"Colonia":"TABALAOPA"},{"Distrito":"León","Cuadrante":47,"Colonia":"JARDINES DE ORIENTE"},{"Distrito":"León","Cuadrante":47,"Colonia":"PARQUE INDUSTRIAL AEROPUERTO"},{"Distrito":"León","Cuadrante":47,"Colonia":"PASEO  DEL CAMINO REAL"},{"Distrito":"León","Cuadrante":47,"Colonia":"QUINTA ARBOLEDA"},{"Distrito":"León","Cuadrante":47,"Colonia":"RINCONADA ORIENTE"},{"Distrito":"León","Cuadrante":48,"Colonia":"JARDINES DE SAN AGUSTÍN"},{"Distrito":"León","Cuadrante":48,"Colonia":"LOS ENCINOS ORIENTE"},{"Distrito":"León","Cuadrante":48,"Colonia":"PORTAL DEL REAL"},{"Distrito":"León","Cuadrante":48,"Colonia":"PUERTA SAVONA"},{"Distrito":"León","Cuadrante":48,"Colonia":"PUNTA ORIENTE"},{"Distrito":"León","Cuadrante":48,"Colonia":"SOL DE ORIENTE"},{"Distrito":"León","Cuadrante":49,"Colonia":"ANTIGUA HACIENDA TABALAOPA"},{"Distrito":"León","Cuadrante":49,"Colonia":"CONCORDIA"},{"Distrito":"León","Cuadrante":49,"Colonia":"EL TORREON"},{"Distrito":"León","Cuadrante":49,"Colonia":"LAS ACACIAS"},{"Distrito":"León","Cuadrante":49,"Colonia":"RESIDENCIAL ROBINSON"},{"Distrito":"León","Cuadrante":49,"Colonia":"ROBINSON IV"},{"Distrito":"León","Cuadrante":49,"Colonia":"SANTO DOMINGO"},{"Distrito":"León","Cuadrante":50,"Colonia":"PRADO SUR II"},{"Distrito":"León","Cuadrante":50,"Colonia":"RINCONES DE SIERRA AZUL"},{"Distrito":"León","Cuadrante":50,"Colonia":"SAN ISIDRO SALVADOR"},{"Distrito":"León","Cuadrante":50,"Colonia":"SIERRA AZUL"},{"Distrito":"León","Cuadrante":50,"Colonia":"VEREDAS DEL SUR"},{"Distrito":"León","Cuadrante":51,"Colonia":"PARQUE INDUSTRIAL CHIHUAHUA SUR"},{"Distrito":"León","Cuadrante":51,"Colonia":"PRADERAS DEL SUR"},{"Distrito":"Morelos","Cuadrante":52,"Colonia":"CERRO CORONEL"},{"Distrito":"Morelos","Cuadrante":52,"Colonia":"CNOP"},{"Distrito":"Morelos","Cuadrante":52,"Colonia":"CUMBRES DE ROBINSON"},{"Distrito":"Morelos","Cuadrante":52,"Colonia":"INDEPENDENCIA"},{"Distrito":"Morelos","Cuadrante":52,"Colonia":"PORTICOS DE BELLA CUMBRE"},{"Distrito":"Morelos","Cuadrante":52,"Colonia":"RUBEN JARAMILLO"},{"Distrito":"Morelos","Cuadrante":52,"Colonia":"RUBEN JARAMILLO (AMPL.)"},{"Distrito":"Morelos","Cuadrante":53,"Colonia":"2 DE OCTUBRE"},{"Distrito":"Morelos","Cuadrante":53,"Colonia":"ANTIGUO LIENZO CHARRO"},{"Distrito":"Morelos","Cuadrante":53,"Colonia":"ARTURO GAMIZ"},{"Distrito":"Morelos","Cuadrante":53,"Colonia":"CHARRERIA"},{"Distrito":"Morelos","Cuadrante":53,"Colonia":"LADRILLEROS"},{"Distrito":"Morelos","Cuadrante":53,"Colonia":"MANUEL BUENDIA"},{"Distrito":"Morelos","Cuadrante":53,"Colonia":"MANUEL BUENDIA (LADRILLEROS)"},{"Distrito":"Morelos","Cuadrante":53,"Colonia":"MELCHOR OCAMPO"},{"Distrito":"Morelos","Cuadrante":53,"Colonia":"OBRERA VISTA AVALOS"},{"Distrito":"Morelos","Cuadrante":53,"Colonia":"ROBINSON SECTOR III"},{"Distrito":"Morelos","Cuadrante":53,"Colonia":"ZONA INDUSTRIAL ROBINSON"},{"Distrito":"Morelos","Cuadrante":54,"Colonia":"1 DE MAYO"},{"Distrito":"Morelos","Cuadrante":54,"Colonia":"AMERICANA"},{"Distrito":"Morelos","Cuadrante":54,"Colonia":"AVALOS INDUSTRIA MINERA DE MEXICO"},{"Distrito":"Morelos","Cuadrante":54,"Colonia":"CONJUNTO URBANO VETERANOS"},{"Distrito":"Morelos","Cuadrante":54,"Colonia":"CRUCERO"},{"Distrito":"Morelos","Cuadrante":54,"Colonia":"DEPORTIVA SUR"},{"Distrito":"Morelos","Cuadrante":54,"Colonia":"FUNDADORES"},{"Distrito":"Morelos","Cuadrante":54,"Colonia":"PANELES PONDEROSA"},{"Distrito":"Morelos","Cuadrante":54,"Colonia":"RINCONADA LOS NOGALES"},{"Distrito":"Morelos","Cuadrante":54,"Colonia":"VETERANOS"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"BAHIAS (GRANJAS)"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"CRUCERO (AMPL.)"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"CRUZ DEL SUR"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"DIANA LAURA RIOJAS DE COLOSIO"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"FUNDADORES (MARGARITAS)"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"LA PISTA (SUR)"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"LADRILLEROS SUR"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"LAS MARGARITAS"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"LOMAS ORIENTE"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"LOS PILARES"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"LOS PILARES II"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"MARGARITAS"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"MEXICO (GRANJAS)"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"MORSE"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"NOGALES"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"SAN ANGEL"},{"Distrito":"Morelos","Cuadrante":55,"Colonia":"SAN MARCOS"},{"Distrito":"Morelos","Cuadrante":56,"Colonia":"CECYT"},{"Distrito":"Morelos","Cuadrante":56,"Colonia":"DIVISION DEL NORTE"},{"Distrito":"Morelos","Cuadrante":56,"Colonia":"INTEGRACION DE LA SOCIEDAD"},{"Distrito":"Morelos","Cuadrante":56,"Colonia":"JUAREZ"},{"Distrito":"Morelos","Cuadrante":56,"Colonia":"LIBERTAD"},{"Distrito":"Morelos","Cuadrante":56,"Colonia":"MARMOL"},{"Distrito":"Morelos","Cuadrante":56,"Colonia":"MISAEL NUÑEZ"},{"Distrito":"Morelos","Cuadrante":56,"Colonia":"SECTOR RELOJ"},{"Distrito":"Morelos","Cuadrante":57,"Colonia":"FELIPE ANGELES (SUR)"},{"Distrito":"Morelos","Cuadrante":57,"Colonia":"MEXICO 91"},{"Distrito":"Morelos","Cuadrante":57,"Colonia":"MIGUEL HIDALGO"},{"Distrito":"Morelos","Cuadrante":57,"Colonia":"PLAN DE AYALA"},{"Distrito":"Morelos","Cuadrante":57,"Colonia":"RICARDO FLORES MAGON"},{"Distrito":"Morelos","Cuadrante":57,"Colonia":"RIGOBERTO QUIROZ"},{"Distrito":"Morelos","Cuadrante":57,"Colonia":"VILLA JUAREZ"},{"Distrito":"Morelos","Cuadrante":58,"Colonia":"CLARA CORDOVA"},{"Distrito":"Morelos","Cuadrante":58,"Colonia":"DIVISADERO"},{"Distrito":"Morelos","Cuadrante":58,"Colonia":"JORGE BAROUSSE"},{"Distrito":"Morelos","Cuadrante":58,"Colonia":"LADRILLEROS CERRO GRANDE"},{"Distrito":"Morelos","Cuadrante":58,"Colonia":"LUIS DONALDO COLOSIO MURRIETA"},{"Distrito":"Morelos","Cuadrante":58,"Colonia":"SECRETARIA DE LA MARINA"},{"Distrito":"Morelos","Cuadrante":58,"Colonia":"VISTA HERMOSA (SUR)"},{"Distrito":"Morelos","Cuadrante":58,"Colonia":"VISTAS CERRO GRANDE"},{"Distrito":"Morelos","Cuadrante":59,"Colonia":"3 DE MAYO"},{"Distrito":"Morelos","Cuadrante":59,"Colonia":"CASA BLANCA"},{"Distrito":"Morelos","Cuadrante":59,"Colonia":"GRANJAS CERRO GRANDE"},{"Distrito":"Morelos","Cuadrante":59,"Colonia":"LA SOLEDAD"},{"Distrito":"Morelos","Cuadrante":59,"Colonia":"LAS CRUCES"},{"Distrito":"Morelos","Cuadrante":59,"Colonia":"SAN MARTIN (SUR)"},{"Distrito":"Morelos","Cuadrante":60,"Colonia":"CASA BLANCA SUR"},{"Distrito":"Morelos","Cuadrante":60,"Colonia":"GRANJAS DEL SUR"},{"Distrito":"Morelos","Cuadrante":60,"Colonia":"LAS MARGARITAS (SUR)"},{"Distrito":"Morelos","Cuadrante":60,"Colonia":"LOS LLANOS"},{"Distrito":"Morelos","Cuadrante":60,"Colonia":"MEZQUITES SUR"},{"Distrito":"Morelos","Cuadrante":60,"Colonia":"PRADERAS"},{"Distrito":"Morelos","Cuadrante":60,"Colonia":"TORIBIO ORTEGA (SUR)"},{"Distrito":"Morelos","Cuadrante":60,"Colonia":"UNIDAD DEPORTIVA SUR"},{"Distrito":"Morelos","Cuadrante":60,"Colonia":"VALLE DORADO"},{"Distrito":"Morelos","Cuadrante":60,"Colonia":"VALLE GRANDE (COL. EJIDAL)"},{"Distrito":"Morelos","Cuadrante":61,"Colonia":"SEP"},{"Distrito":"Morelos","Cuadrante":61,"Colonia":"GRANJAS SUR"},{"Distrito":"Morelos","Cuadrante":61,"Colonia":"LAS FLORES"},{"Distrito":"Morelos","Cuadrante":61,"Colonia":"MARIA ISABEL"},{"Distrito":"Morelos","Cuadrante":61,"Colonia":"MARIA LUISA"},{"Distrito":"Morelos","Cuadrante":61,"Colonia":"SAN JOSE (SUR)"},{"Distrito":"Morelos","Cuadrante":61,"Colonia":"VALLE DEL SUR"},{"Distrito":"Morelos","Cuadrante":62,"Colonia":"11 DE FEBRERO"},{"Distrito":"Morelos","Cuadrante":62,"Colonia":"COLONIA LAS TORRES"},{"Distrito":"Morelos","Cuadrante":62,"Colonia":"PUERTA DE ALCALA"},{"Distrito":"Morelos","Cuadrante":63,"Colonia":"LIBRADITA"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"24 DE JUNIO"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"ADRIANA"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"ALAMOS"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"ANEXO SANTA ROSA NORTE"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"DEPORTISTAS"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"FELIPE ANGELES (NORTE)"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"FRACC. MOLINO DE VIENTO"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"IGNACIO RODRIGUEZ"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"INSURGENTES (NORTE)"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"LAS DELICIAS"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"LOMAS SAN JOSE"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"MEXICO 86"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"REAL UNIVERSIDAD"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"RENOVACION"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"RESIDENCIAL UNIVERSIDAD"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"SANTA MONICA"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"SANTA ROSA NORTE"},{"Distrito":"Villa","Cuadrante":16,"Colonia":"SANTA TERESA"},{"Distrito":"Villa","Cuadrante":17,"Colonia":"REVOLUCION"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"2 DE JUNIO"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"C.D.P."},{"Distrito":"Villa","Cuadrante":18,"Colonia":"C.T.M."},{"Distrito":"Villa","Cuadrante":18,"Colonia":"EL OJITO"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"EL VERGEL"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"ESCONDIDA LOS NOGALES"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"FRACC. QUINTA SAN MIGUEL"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"FRANCISCO DOMINGUEZ"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"GRECIA FRACCIONAMIENTO"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"GRUTAS DE SACRAMENTO"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"IMPERIAL"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"JARDINES DEL SACRAMENTO"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"LA RIBEREÑA I"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"LEONARDO BRAVO"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"LOS NOGALES"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"LOS POTREROS"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"NOMBRE DE DIOS"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"OASIS REVOLUCION"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"PEDREGAL DEL REAL"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"QUINTAS SAN ANTONIO II"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"SAN PATRICIO"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"SAN PATRICIO II"},{"Distrito":"Villa","Cuadrante":18,"Colonia":"SECTOR INDEPENDENCIA"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"22 DE SEPTIEMBRE"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"CASA BLANCA (NORTE)"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"CHURUBUSCO"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"COMPLEJO INDUSTRIAL SAUCITO"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"LAURA LETICIA"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"LOURDES"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"MAJALCA"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"NUEVO PARAISO"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"PAQUIME"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"SAN JOSE"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"SANTA BARBARA (BARBARITA)"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"SANTA ELENA"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"TIERRA Y LIBERTAD"},{"Distrito":"Villa","Cuadrante":19,"Colonia":"TORRES DEL REY"},{"Distrito":"Villa","Cuadrante":20,"Colonia":"C.T.M. (ORTIZ)"},{"Distrito":"Villa","Cuadrante":20,"Colonia":"FRANCISCO VILLA"},{"Distrito":"Villa","Cuadrante":20,"Colonia":"GLORIA"},{"Distrito":"Villa","Cuadrante":20,"Colonia":"HUERTA LEGARRETA"},{"Distrito":"Villa","Cuadrante":20,"Colonia":"JARDINES DEL NORTE"},{"Distrito":"Villa","Cuadrante":20,"Colonia":"JUAN ESCUTIA"},{"Distrito":"Villa","Cuadrante":20,"Colonia":"LA FRANJA"},{"Distrito":"Villa","Cuadrante":20,"Colonia":"NIÑOS HEROES"},{"Distrito":"Villa","Cuadrante":20,"Colonia":"RINCONES SAN ANDRES"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"ARBOLEDAS"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"ARGENTINA"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"COLINAS DEL SOL"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"DIEGO LUCERO"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"FRACCION PANAMERICANA"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"INFONAVIT LOS MEZQUITES"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"INFONAVIT NACIONAL"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"LOMAS DEL SOL II"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"LOMAS KARIQUE"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"LOMAS LOS FRAILES"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"LOS ENCINOS"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"LOS FRAILES"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"PANORAMICO"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"PASEO DE LAS MORAS"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"SAN ANDRES"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"SAN PABLO"},{"Distrito":"Villa","Cuadrante":21,"Colonia":"SAUCITO"},{"Distrito":"Villa","Cuadrante":22,"Colonia":"CONDOMINIOS ROMA"},{"Distrito":"Villa","Cuadrante":22,"Colonia":"INFONAVIT VALLARTA"},{"Distrito":"Villa","Cuadrante":22,"Colonia":"KARIKE"},{"Distrito":"Villa","Cuadrante":22,"Colonia":"LAGOS"},{"Distrito":"Villa","Cuadrante":22,"Colonia":"LOMAS VALLARTA"},{"Distrito":"Villa","Cuadrante":22,"Colonia":"ROMA III Y IV"},{"Distrito":"Villa","Cuadrante":22,"Colonia":"ROMA V"},{"Distrito":"Villa","Cuadrante":22,"Colonia":"SAN AGUSTIN (NORTE)"},{"Distrito":"Villa","Cuadrante":22,"Colonia":"SAN IGNACIO"},{"Distrito":"Villa","Cuadrante":22,"Colonia":"ZARAGOZA"},{"Distrito":"Villa","Cuadrante":23,"Colonia":"LAS GRANJAS"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"ABRAHAM GONZALEZ (NORTE)"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"ADOLFO LOPEZ MATEOS"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"ALTA MIRA"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"ANGELES"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"BASASEACHI"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"BRISAS DEL REAL I Y II"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"CEROCAHUI"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"CHIHUAHUA"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"COMERCIAL SICOMORO"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"CONDOMINIO AMERICA LATINA"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"CONDOMINIO FCO. I MADERO"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"CONDOMINIOS MITLA"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"CONTINENTAL"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"COSMOS"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"COUNTRY ALAMOS"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"ESPERANZA (NORTE)"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"FRANCISCO I MADERO"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"INSURGENTES"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"KAFRE"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"LOS SAUCOS"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"LUZ MARIA"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"MIRAMAR"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"MORELOS"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"PARRAL"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"PARRALENSE"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"PRIVANZA ANGEL"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"QUINTAS DEL RIO"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"RESIDENCIAL FLORESTA"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"RINCON COLONIAL"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"RINCON DEL LAGO"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"RINCON PARRALENSE"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"RIO AROS"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"RIO GRANDE"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"ROMA II"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"SACRAMENTO FRACC."},{"Distrito":"Villa","Cuadrante":24,"Colonia":"SAN CARLOS I,II"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"SAN CRISTOBAL"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"SAN JORGE (NORTE)"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"SAN VICENTE"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"SANTA BARBARA"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"SATELITE"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"SECTOR TERMOELECTRICA"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"TERMOELECTRICA"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"VERDE"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"VERSALLES"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"VICENTE GUERRERO"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"VILLAS DE SAN CRISTOBAL I"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"VILLAS DE SAN CRISTOBAL II"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"VISTAS DE SACRAMENTO"},{"Distrito":"Villa","Cuadrante":24,"Colonia":"ZONA INDUSTRIAL NOMBRE DE DIOS"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"ALTAVISTA"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"CARLOS GUIZAR"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"CIUDAD DEPORTIVA"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"CONDOMINIO COMERCIAL SAN FELIPE"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"JARDINES DE CHIHUAHUA"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"LA CIMA"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"LEONES UNIVERSIDAD"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"LOS LEONES"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"MAGISTERIAL SOLIDARIDAD"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"MAGISTERIAL UNIVERSIDAD"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"RESIDENCIAL NIEVES"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"RINCONES LA CIMA"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"SAN FELIPE"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"SANTO NIÑO"},{"Distrito":"Villa","Cuadrante":25,"Colonia":"UNIDAD UNIVERSIDAD"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"10 DE MAYO"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"ARCADIAS"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"BARRIO DEL NORTE"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"CERRO PRIETO"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"CLAUDIA"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"EL VALLECITO"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"FERROCARRILEROS"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"HACIENDA DE LA FLOR"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"INDUSTRIAL"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"JOSEFA ORTIZ DE DOMINGUEZ"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"JUNTA DE LOS RIOS"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"LA JUNTA"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"LINCE"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"LINCE I"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"LINCE III"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"PASO DEL NORTE"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"REFORMA (NORTE)"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"RINCON DEL ARCANGEL"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"RINCONES DE SACRAMENTO"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"RODOLFO AGUILAR"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"SAN FRANCISCO"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"SAN JUAN BAUTISTA"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"SAN RENE"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"SILVINO RODRIGUEZ"},{"Distrito":"Villa","Cuadrante":26,"Colonia":"UNIDAD TECNOLOGICO"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"ARQUITOS"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"EL PALOMAR"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"FUENTES DEL SANTUARIO"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"LA LOMITA"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"LAS PALMAS"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"LOMAS DEL SANTUARIO"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"LOS SICOMOROS"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"MIRADOR"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"RINCONADA TAURINA"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"UNIDAD CHIHUAHUA"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"VISTA HERMOSA"},{"Distrito":"Villa","Cuadrante":27,"Colonia":"VISTA HERMOSA NORTE"},{"Distrito":"Zapata","Cuadrante":64,"Colonia":"CAMPESTRE LAS ALAMEDAS"},{"Distrito":"Zapata","Cuadrante":65,"Colonia":"ANKARA"},{"Distrito":"Zapata","Cuadrante":65,"Colonia":"CAMPESTRE DEL BOSQUE"},{"Distrito":"Zapata","Cuadrante":65,"Colonia":"CASTILLA RELIZ"},{"Distrito":"Zapata","Cuadrante":65,"Colonia":"GRANJAS AGROPECUARIAS"},{"Distrito":"Zapata","Cuadrante":65,"Colonia":"GRUPO OBRERA"},{"Distrito":"Zapata","Cuadrante":65,"Colonia":"LABOR DE TERRAZAS (PORTILLO)"},{"Distrito":"Zapata","Cuadrante":65,"Colonia":"LAS ANIMAS"},{"Distrito":"Zapata","Cuadrante":65,"Colonia":"QUINTAS LAS ANIMAS"},{"Distrito":"Zapata","Cuadrante":65,"Colonia":"RANCHO LAS ESCOBAS"},{"Distrito":"Zapata","Cuadrante":65,"Colonia":"RESIDENCIAL ANDARES"},{"Distrito":"Zapata","Cuadrante":66,"Colonia":"ALFREDO CHÁVEZ"},{"Distrito":"Zapata","Cuadrante":66,"Colonia":"ESPERANZA"},{"Distrito":"Zapata","Cuadrante":66,"Colonia":"HIDALGO (MORELOS)"},{"Distrito":"Zapata","Cuadrante":66,"Colonia":"MARTÍN LÓPEZ"},{"Distrito":"Zapata","Cuadrante":66,"Colonia":"PEÑA BLANCA"},{"Distrito":"Zapata","Cuadrante":66,"Colonia":"RAMON REYES"},{"Distrito":"Zapata","Cuadrante":66,"Colonia":"SANTUARIO DEL PADRE MALDONADO"},{"Distrito":"Zapata","Cuadrante":67,"Colonia":"CAMPESINA"},{"Distrito":"Zapata","Cuadrante":67,"Colonia":"FRANCISCO I. MADERO"},{"Distrito":"Zapata","Cuadrante":67,"Colonia":"GUADALUPE"},{"Distrito":"Zapata","Cuadrante":67,"Colonia":"INALAMBRICA"},{"Distrito":"Zapata","Cuadrante":67,"Colonia":"SECTOR SALUD"},{"Distrito":"Zapata","Cuadrante":67,"Colonia":"ZARCO"},{"Distrito":"Zapata","Cuadrante":68,"Colonia":"ALBINO MIRELES"},{"Distrito":"Zapata","Cuadrante":68,"Colonia":"CUARTELES"},{"Distrito":"Zapata","Cuadrante":68,"Colonia":"CUAUHTEMOC"},{"Distrito":"Zapata","Cuadrante":68,"Colonia":"HERRADURA PDU"},{"Distrito":"Zapata","Cuadrante":68,"Colonia":"JARDINES DEL SANTUARIO"},{"Distrito":"Zapata","Cuadrante":68,"Colonia":"LAS HUERTAS"},{"Distrito":"Zapata","Cuadrante":68,"Colonia":"LINSS"},{"Distrito":"Zapata","Cuadrante":68,"Colonia":"RESIDENCIAL ZARCO"},{"Distrito":"Zapata","Cuadrante":68,"Colonia":"RUBIO"},{"Distrito":"Zapata","Cuadrante":68,"Colonia":"SANTA RITA"},{"Distrito":"Zapata","Cuadrante":69,"Colonia":"BELLAVISTA"},{"Distrito":"Zapata","Cuadrante":69,"Colonia":"PABLO AMAYA NORTE"},{"Distrito":"Zapata","Cuadrante":69,"Colonia":"PABLO AMAYA SUR"},{"Distrito":"Zapata","Cuadrante":69,"Colonia":"PACIFICO"},{"Distrito":"Zapata","Cuadrante":69,"Colonia":"SAN RAFAEL"},{"Distrito":"Zapata","Cuadrante":69,"Colonia":"SANTA ROSA"},{"Distrito":"Zapata","Cuadrante":69,"Colonia":"UNIDAD SANTA ROSA"},{"Distrito":"Zapata","Cuadrante":70,"Colonia":"BARRIO DE LONDRES"},{"Distrito":"Zapata","Cuadrante":70,"Colonia":"LEALTAD"},{"Distrito":"Zapata","Cuadrante":70,"Colonia":"SAN MIGUEL"},{"Distrito":"Zapata","Cuadrante":71,"Colonia":"LA JOYA"},{"Distrito":"Zapata","Cuadrante":71,"Colonia":"LA MINITA"},{"Distrito":"Zapata","Cuadrante":71,"Colonia":"MADERA 65"},{"Distrito":"Zapata","Cuadrante":71,"Colonia":"NUEVA ESPAÑA I"},{"Distrito":"Zapata","Cuadrante":71,"Colonia":"PUERTA DEL SOL"},{"Distrito":"Zapata","Cuadrante":71,"Colonia":"RACHALI  I,II"},{"Distrito":"Zapata","Cuadrante":71,"Colonia":"TORIBIO ORTEGA"},{"Distrito":"Zapata","Cuadrante":72,"Colonia":"AIRES DEL SUR"},{"Distrito":"Zapata","Cuadrante":72,"Colonia":"BRISAS DEL NOROESTE"},{"Distrito":"Zapata","Cuadrante":72,"Colonia":"BUROCRATA FEDERAL"},{"Distrito":"Zapata","Cuadrante":72,"Colonia":"FRANCISCO R. ALMADA"},{"Distrito":"Zapata","Cuadrante":72,"Colonia":"LAS MALVINAS"},{"Distrito":"Zapata","Cuadrante":72,"Colonia":"LOS PINOS"},{"Distrito":"Zapata","Cuadrante":72,"Colonia":"MARGARITA MAZA DE JUAREZ"},{"Distrito":"Zapata","Cuadrante":72,"Colonia":"PAVIS BORUNDA"},{"Distrito":"Zapata","Cuadrante":72,"Colonia":"PENSIONES CIVILES DEL ESTADO"},{"Distrito":"Zapata","Cuadrante":72,"Colonia":"UNIDAD CUAUHTEMOC"},{"Distrito":"Zapata","Cuadrante":72,"Colonia":"UNIVERSITARIA BELLA VISTA"},{"Distrito":"Zapata","Cuadrante":73,"Colonia":"CERRO DE LA CRUZ"},{"Distrito":"Zapata","Cuadrante":73,"Colonia":"DAVID ALFARO SIQUEIROS"},{"Distrito":"Zapata","Cuadrante":73,"Colonia":"P.R.I. MUNICIPAL"},{"Distrito":"Zapata","Cuadrante":73,"Colonia":"RAMIRO VALLES"},{"Distrito":"Zapata","Cuadrante":73,"Colonia":"REFORMA I"},{"Distrito":"Zapata","Cuadrante":73,"Colonia":"ROSARIO"},{"Distrito":"Zapata","Cuadrante":73,"Colonia":"SAN MARTIN"},{"Distrito":"Zapata","Cuadrante":74,"Colonia":"DALE"},{"Distrito":"Zapata","Cuadrante":74,"Colonia":"FERROCARRILERA"},{"Distrito":"Zapata","Cuadrante":74,"Colonia":"FRACCIONAMIENTO FRANCISCO R. ALMADA"},{"Distrito":"Zapata","Cuadrante":74,"Colonia":"GUSTAVO DIAZ ORDAZ"},{"Distrito":"Zapata","Cuadrante":74,"Colonia":"REFORMA"},{"Distrito":"Zapata","Cuadrante":74,"Colonia":"REFORMA II"},{"Distrito":"Zapata","Cuadrante":75,"Colonia":"CERRO ALTO"},{"Distrito":"Zapata","Cuadrante":75,"Colonia":"CERRO GRANDE"},{"Distrito":"Zapata","Cuadrante":75,"Colonia":"LAS VENCEDORAS"},{"Distrito":"Zapata","Cuadrante":75,"Colonia":"LOMA ALTA"},{"Distrito":"Zapata","Cuadrante":75,"Colonia":"SAN AGUSTIN"},{"Distrito":"Zapata","Cuadrante":75,"Colonia":"SAN JUAN"},{"Distrito":"Zapata","Cuadrante":75,"Colonia":"UNIDAD PROLETARIA"},{"Distrito":"Zapata","Cuadrante":75,"Colonia":"VALLE ESCONDIDO"},{"Distrito":"Zapata","Cuadrante":75,"Colonia":"VILLA DOLORES"},{"Distrito":"Zapata","Cuadrante":75,"Colonia":"VILLAS DEL SUR"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"15 DE ENERO"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"17 DE JUNIO"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"ALIANZA POPULAR"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"CHULAVISTA"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"CUMBRES DEL SUR I Y II"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"DESARROLLO URBANO Y AMPLIACION"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"DORADOS DE VILLA"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"LAS ADELITAS"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"LAZARO CARDENAS"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"MANUEL BERNARDO AGUIRRE"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"MARMOL VIEJO"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"NUEVA ESPAÑA II"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"PROGRESO SUR"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"PUERTA ESMERALDA"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"SAN JORGE"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"SAN LAZARO"},{"Distrito":"Zapata","Cuadrante":76,"Colonia":"VILLAS DE NUEVA ESPAÑA"},{"Distrito":"Zapata","Cuadrante":77,"Colonia":"GENARO VAZQUEZ"},{"Distrito":"Zapata","Cuadrante":77,"Colonia":"UNIVERSITARIA (AMPL.)"},{"Distrito":"Zapata","Cuadrante":77,"Colonia":"UNIVERSITARIO (ANTES GRANJAS UNIVERSITARIAS)"},{"Distrito":"Zapata","Cuadrante":77,"Colonia":"VALLE DE LA MADRID"},{"Distrito":"Zapata","Cuadrante":77,"Colonia":"ZOOTECNIA"}];
+
+const CLASE_DISTRITO = {
+  'Ángel': 'd-angel', 'Colón': 'd-colon', 'Diana': 'd-diana',
+  'León': 'd-leon', 'Morelos': 'd-morelos', 'Villa': 'd-villa', 'Zapata': 'd-zapata'
+};
+
+const POR_PAGINA = 50;
+let paginaActual = 1;
+let filtrados = [...DATOS];
+let terminoBusqueda = '';
+
+// Poblar selects
+function init() {
+  const distritos = [...new Set(DATOS.map(d => d.Distrito))].sort();
+  const selDist = document.getElementById('busq-distrito');
+  distritos.forEach(d => {
+    const o = document.createElement('option');
+    o.value = d; o.textContent = 'Distrito ' + d;
+    selDist.appendChild(o);
+  });
+
+  const cuadrantes = [...new Set(DATOS.map(d => d.Cuadrante))].sort((a,b) => a-b);
+  const selCuad = document.getElementById('busq-cuadrante');
+  cuadrantes.forEach(c => {
+    const o = document.createElement('option');
+    o.value = c; o.textContent = 'Cuadrante ' + c;
+    selCuad.appendChild(o);
+  });
+
+  document.getElementById('busq-colonia').addEventListener('input', aplicarFiltros);
+  document.getElementById('busq-distrito').addEventListener('change', aplicarFiltros);
+  document.getElementById('busq-cuadrante').addEventListener('change', aplicarFiltros);
+
+  aplicarFiltros();
+}
+
+function normalizar(str) {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().trim();
+}
+
+function aplicarFiltros() {
+  terminoBusqueda = document.getElementById('busq-colonia').value.trim();
+  const dist = document.getElementById('busq-distrito').value;
+  const cuad = document.getElementById('busq-cuadrante').value;
+  const termNorm = normalizar(terminoBusqueda);
+
+  filtrados = DATOS.filter(r => {
+    if (dist && r.Distrito !== dist) return false;
+    if (cuad && r.Cuadrante !== parseInt(cuad)) return false;
+    if (termNorm && !normalizar(r.Colonia).includes(termNorm)) return false;
+    return true;
+  });
+
+  paginaActual = 1;
+  actualizarStats();
+  renderTabla();
+  renderPaginacion();
+}
+
+function actualizarStats() {
+  const distritos = new Set(filtrados.map(d => d.Distrito));
+  const cuadrantes = new Set(filtrados.map(d => d.Cuadrante));
+  document.getElementById('stat-mostrando').textContent = filtrados.length;
+  document.getElementById('stat-distritos').textContent = distritos.size;
+  document.getElementById('stat-cuadrantes').textContent = cuadrantes.size;
+  document.getElementById('resultados-count').textContent =
+    filtrados.length === DATOS.length
+      ? `Mostrando todas las ${DATOS.length} colonias del catálogo`
+      : `${filtrados.length} colonia${filtrados.length !== 1 ? 's' : ''} encontrada${filtrados.length !== 1 ? 's' : ''}`;
+}
+
+function resaltar(texto, termino) {
+  if (!termino) return texto;
+  const norm = normalizar(termino);
+  const textNorm = normalizar(texto);
+  const idx = textNorm.indexOf(norm);
+  if (idx === -1) return texto;
+  return texto.slice(0, idx) + '<mark>' + texto.slice(idx, idx + norm.length) + '</mark>' + texto.slice(idx + norm.length);
+}
+
+function renderTabla() {
+  const tbody = document.getElementById('tabla-body');
+  const sinRes = document.getElementById('sin-resultados');
+  const inicio = (paginaActual - 1) * POR_PAGINA;
+  const pagina = filtrados.slice(inicio, inicio + POR_PAGINA);
+
+  if (filtrados.length === 0) {
+    tbody.innerHTML = '';
+    sinRes.style.display = 'block';
+    return;
+  }
+  sinRes.style.display = 'none';
+
+  tbody.innerHTML = pagina.map((r, i) => `
+    <tr>
+      <td style="color:#a0aec0;font-weight:400;font-size:0.78rem;">${inicio + i + 1}</td>
+      <td><span class="badge-distrito ${CLASE_DISTRITO[r.Distrito] || ''}">${r.Distrito}</span></td>
+      <td><span class="cuadrante-num">${r.Cuadrante}</span></td>
+      <td>${resaltar(r.Colonia, terminoBusqueda)}</td>
+    </tr>
+  `).join('');
+}
+
+function renderPaginacion() {
+  const total = Math.ceil(filtrados.length / POR_PAGINA);
+  const pag = document.getElementById('paginacion');
+  if (total <= 1) { pag.innerHTML = ''; return; }
+
+  let html = `<button onclick="irPagina(${paginaActual-1})" ${paginaActual===1?'disabled':''}>← Anterior</button>`;
+  html += `<span class="info-pag">Página ${paginaActual} de ${total}</span>`;
+
+  // Botones de página
+  const rango = 2;
+  for (let p = 1; p <= total; p++) {
+    if (p === 1 || p === total || (p >= paginaActual - rango && p <= paginaActual + rango)) {
+      html += `<button class="${p===paginaActual?'activa':''}" onclick="irPagina(${p})">${p}</button>`;
+    } else if (p === paginaActual - rango - 1 || p === paginaActual + rango + 1) {
+      html += `<span style="padding:0 4px;color:#a0aec0;">…</span>`;
+    }
+  }
+
+  html += `<button onclick="irPagina(${paginaActual+1})" ${paginaActual===total?'disabled':''}>Siguiente →</button>`;
+  pag.innerHTML = html;
+}
+
+function irPagina(n) {
+  const total = Math.ceil(filtrados.length / POR_PAGINA);
+  if (n < 1 || n > total) return;
+  paginaActual = n;
+  renderTabla();
+  renderPaginacion();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function limpiarFiltros() {
+  document.getElementById('busq-colonia').value = '';
+  document.getElementById('busq-distrito').value = '';
+  document.getElementById('busq-cuadrante').value = '';
+  aplicarFiltros();
+}
+
+init();
+</script>
+</body>
+</html>
+
+```
